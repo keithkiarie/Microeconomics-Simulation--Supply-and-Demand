@@ -6,8 +6,8 @@ class Buyer {
     Transactions = 0;
 
     PriceAdjustmentFactor = {
-        Up: 1.05,
-        Down: 0.95
+        Up: (21/20),
+        Down: (20/21)
     }
 
     constructor() {

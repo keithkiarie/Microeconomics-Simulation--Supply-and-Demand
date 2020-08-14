@@ -1,17 +1,19 @@
 class Seller {
 
+    ProductionCost;
     MinimumPrice; // the minimum price a seller can accept for the commodity
     FirstMinimumPrice;
 
     Transactions = 0;
 
     PriceAdjustmentFactor = {
-        Up: 1.05,
-        Down: 0.95
+        Up: (21/20),
+        Down: (20/21)
     }
 
     constructor() {
-        this.MinimumPrice = Seller.GetRandomPrice();
+        this.ProductionCost = Seller.GetRandomCost();
+        this.MinimumPrice = Seller.GetRandomPrice(this.ProductionCost);
         this.FirstMinimumPrice = this.MinimumPrice;
     }
 
@@ -21,7 +23,8 @@ class Seller {
             this.MinimumPrice *= this.PriceAdjustmentFactor.Up;
         } else {
             // price adjusted downwards if the previous transaction was not successful
-            this.MinimumPrice *= this.PriceAdjustmentFactor.Down;
+            if (this.MinimumPrice * this.PriceAdjustmentFactor.Down < this.ProductionCost) this.MinimumPrice = this.ProductionCost;
+            else this.MinimumPrice *= this.PriceAdjustmentFactor.Down;
         }
     }
 
@@ -30,8 +33,11 @@ class Seller {
         this.AdjustPrice(SuccessfulSale);
     }
 
-    static GetRandomPrice() {
-        return Math.round(Math.random() * 99) + 1;
+    static GetRandomPrice(ProductionCost) {
+        return Math.round(ProductionCost * (1 + Math.random())); // selling price must be above cost
+    }
+    static GetRandomCost() {
+        return Math.round(Math.random() * 100) + 10;
     }
 }
 
