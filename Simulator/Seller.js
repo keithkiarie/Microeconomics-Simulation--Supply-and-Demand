@@ -1,6 +1,8 @@
 class Seller {
 
     MinimumPrice; // the minimum price a seller can accept for the commodity
+    FirstMinimumPrice;
+
     Transactions = 0;
 
     PriceAdjustmentFactor = {
@@ -9,7 +11,8 @@ class Seller {
     }
 
     constructor() {
-        this.MinimumPrice = this.GetRandomPrice()
+        this.MinimumPrice = Seller.GetRandomPrice();
+        this.FirstMinimumPrice = this.MinimumPrice;
     }
 
     AdjustPrice(SuccessfulSale) {
@@ -28,7 +31,7 @@ class Seller {
     }
 
     static GetRandomPrice() {
-        return (Math.random() * 99) + 1;
+        return Math.round(Math.random() * 99) + 1;
     }
 }
 

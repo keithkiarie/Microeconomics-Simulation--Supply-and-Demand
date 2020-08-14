@@ -1,6 +1,8 @@
 class Buyer {
 
     MaximumPrice; // the maximum price a buyer can pay for the commodity
+    FirstMaximumPrice;
+
     Transactions = 0;
 
     PriceAdjustmentFactor = {
@@ -9,16 +11,17 @@ class Buyer {
     }
 
     constructor() {
-        this.MaximumPrice = this.GetRandomPrice()
+        this.MaximumPrice = Buyer.GetRandomPrice();
+        this.FirstMaximumPrice = this.MaximumPrice;
     }
 
     AdjustPrice(SuccessfulPurchase) {
         if (SuccessfulPurchase) {
             // price adjusted downwards if the previous transaction was successful
-            this.MaximumPrice *= this.PriceAdjustmentFactor.Down
+            this.MaximumPrice *= this.PriceAdjustmentFactor.Down;
         } else {
             // price adjusted upwards if the previous transaction was not successful
-            this.MaximumPrice *= this.PriceAdjustmentFactor.Up
+            this.MaximumPrice *= this.PriceAdjustmentFactor.Up;
         }
     }
 
@@ -28,7 +31,7 @@ class Buyer {
     }
 
     static GetRandomPrice() {
-        return Math.random() * 100;
+        return Math.round(Math.random() * 100);
     }
 }
 
