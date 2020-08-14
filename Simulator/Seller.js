@@ -1,8 +1,8 @@
 class Seller {
 
-    ProductionCost;
-    MinimumPrice; // the minimum price a seller can accept for the commodity
-    FirstMinimumPrice;
+    MinimumAcceptable; // the minimum price a seller can accept for the commodity
+    StartingPrice;
+    Price;
 
     Transactions = 0;
 
@@ -12,19 +12,19 @@ class Seller {
     }
 
     constructor() {
-        this.ProductionCost = Seller.GetRandomCost();
-        this.MinimumPrice = Seller.GetRandomPrice(this.ProductionCost);
-        this.FirstMinimumPrice = this.MinimumPrice;
+        this.MinimumAcceptable = Seller.GetRandomCost();
+        this.Price = Seller.GetRandomPrice(this.MinimumAcceptable);
+        this.StartingPrice = this.Price;
     }
 
     AdjustPrice(SuccessfulSale) {
         if (SuccessfulSale) {
             // price adjusted upwards if the previous transaction was successful
-            this.MinimumPrice *= this.PriceAdjustmentFactor.Up;
+            this.Price *= this.PriceAdjustmentFactor.Up;
         } else {
             // price adjusted downwards if the previous transaction was not successful
-            if (this.MinimumPrice * this.PriceAdjustmentFactor.Down < this.ProductionCost) this.MinimumPrice = this.ProductionCost;
-            else this.MinimumPrice *= this.PriceAdjustmentFactor.Down;
+            if (this.Price * this.PriceAdjustmentFactor.Down < this.MinimumAcceptable) this.Price = this.MinimumAcceptable;
+            else this.Price *= this.PriceAdjustmentFactor.Down;
         }
     }
 

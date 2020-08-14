@@ -1,8 +1,8 @@
 const Buyer = require("./Buyer");
 const Seller = require("./Seller");
 
-const NumberOfBuyers = 5;
-const NumberOfSellers = 1;
+const NumberOfBuyers = 15;
+const NumberOfSellers = 15;
 const RoundsOfTrading = 1000000;
 
 const Buyers = [];
@@ -28,7 +28,7 @@ function GetRandomSeller() {
         Buyers.forEach(buyer => {
             let seller = GetRandomSeller();
 
-            if (seller.MinimumPrice <= buyer.MaximumPrice) {
+            if (seller.Price <= buyer.MaximumPayable) {
                 // successful transaction
                 seller.CompleteTransaction(true);
                 buyer.CompleteTransaction(true);
@@ -47,11 +47,10 @@ function GetRandomSeller() {
 
 // show data about the market
 (function AnalyseMarket() {
-    Buyers.forEach(buyer => {
-        buyer.MaximumPrice = parseFloat(buyer.MaximumPrice.toFixed(2));
-    });
+    
     Sellers.forEach(seller => {
-        seller.MinimumPrice = parseFloat(seller.MinimumPrice.toFixed(2));
+        seller.Price = Math.round(seller.Price);
+        seller.PriceAdjustmentFactor.Down = parseFloat(seller.PriceAdjustmentFactor.Down.toFixed(2));
     });
 
     console.log(`Rounds of trading: ${RoundsOfTrading}\n`);
