@@ -1,6 +1,12 @@
 class Seller {
 
-    MinimumPrice;
+    MinimumPrice; // the minimum price a seller can accept for the commodity
+    Transactions = 0;
+
+    PriceAdjustmentFactor = {
+        Up: 1.05,
+        Down: 0.95
+    }
 
     constructor() {
         this.MinimumPrice = this.GetRandomPrice()
@@ -8,15 +14,22 @@ class Seller {
 
     AdjustPrice(SuccessfulSale) {
         if (SuccessfulSale) {
-            // price adjusted downwards if the previous transaction was successful
-
+            // price adjusted upwards if the previous transaction was successful
+            this.MinimumPrice *= this.PriceAdjustmentFactor.Up;
         } else {
-            // price adjusted upwards if the previous transaction was not successful
-
+            // price adjusted downwards if the previous transaction was not successful
+            this.MinimumPrice *= this.PriceAdjustmentFactor.Down;
         }
+    }
+
+    CompleteTransaction(SuccessfulSale) {
+        if (SuccessfulSale) this.Transactions++;
+        this.AdjustPrice(SuccessfulSale);
     }
 
     static GetRandomPrice() {
         return (Math.random() * 99) + 1;
     }
 }
+
+module.exports = Seller;
