@@ -1,0 +1,19 @@
+{
+  "name": "supply_and_demand_simulation",
+  "version": "1.0.0",
+  "description": "Simulation of how the forces of demand and supply interact in a small microeconomics environment",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keithkiarie/Microeconomics-Simulation--Supply-and-Demand.git"
+  },
+  "author": "Keith Kiarie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keithkiarie/Microeconomics-Simulation--Supply-and-Demand/issues"
+  },
+  "homepage": "https://github.com/keithkiarie/Microeconomics-Simulation--Supply-and-Demand#readme"
+}
