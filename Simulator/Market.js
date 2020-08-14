@@ -10,10 +10,10 @@ const Sellers = [];
 
 let Transactions = 0;
 
-(function CreateTraders() {
+function CreateTraders() {
     for (let i = 0; i < NumberOfBuyers; i++) Buyers.push(new Buyer);
     for (let i = 0; i < NumberOfSellers; i++) Sellers.push(new Seller);
-})()
+}
 
 function GetRandomSeller() {
     let RandomSeller = Math.round(Math.random() * (Sellers.length - 1));
@@ -22,7 +22,7 @@ function GetRandomSeller() {
 
 
 // buyer and seller attempt to do a transction
-(function Trade(Rounds) {
+function Trade(Rounds) {
 
     for (let Round = 0; Round < Rounds; Round++) {
         Buyers.forEach(buyer => {
@@ -42,11 +42,11 @@ function GetRandomSeller() {
             }
         });
     }
-})(RoundsOfTrading);
+}
 
 
 // show data about the market
-(function AnalyseMarket() {
+function AnalyseMarket() {
     
     Sellers.forEach(seller => {
         seller.Price = Math.round(seller.Price);
@@ -63,4 +63,14 @@ function GetRandomSeller() {
 
     console.log("\nBuyers:");
     console.table(Buyers);
-})();
+}
+
+
+
+function StartMarket() {
+    CreateTraders();
+    Trade(RoundsOfTrading);
+    AnalyseMarket();
+}
+
+module.exports = StartMarket;
