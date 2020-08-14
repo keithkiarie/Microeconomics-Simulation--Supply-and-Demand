@@ -2,8 +2,8 @@ const Buyer = require("./Buyer");
 const Seller = require("./Seller");
 
 const NumberOfBuyers = 5;
-const NumberOfSellers = 2;
-const RoundsOfTrading = 100000;
+const NumberOfSellers = 1;
+const RoundsOfTrading = 1000000;
 
 const Buyers = [];
 const Sellers = [];
@@ -47,34 +47,21 @@ function GetRandomSeller() {
 
 // show data about the market
 (function AnalyseMarket() {
+    Buyers.forEach(buyer => {
+        buyer.MaximumPrice = parseFloat(buyer.MaximumPrice.toFixed(2));
+    });
+    Sellers.forEach(seller => {
+        seller.MinimumPrice = parseFloat(seller.MinimumPrice.toFixed(2));
+    });
+
     console.log(`Rounds of trading: ${RoundsOfTrading}\n`);
     console.log(`Number of buyers: ${NumberOfBuyers}`);
     console.log(`Number of sellers: ${NumberOfSellers}`);
     console.log(`Number of transactions: ${Transactions}`);
 
-    console.log("\n");
+    console.log("\nSellers:");
+    console.table(Sellers);
 
-    // initial
-    console.log("Sellers' first Minimum Price:");
-    Sellers.forEach(seller => {
-        console.log(`\t${seller.FirstMinimumPrice.toFixed(2)}`);
-    });
-
-    console.log("Buyers' first Maximum Price:");
-    Buyers.forEach(buyer => {
-        console.log(`\t${buyer.FirstMaximumPrice.toFixed(2)}`);
-    });
-
-    console.log("\n");
-
-    // final
-    console.log("Sellers' final Minimum Price:");
-    Sellers.forEach(seller => {
-        console.log(`\t${Math.ceil(seller.MinimumPrice)}`);
-    });
-
-    console.log("Buyers' final Maximum Price:");
-    Buyers.forEach(buyer => {
-        console.log(`\t${Math.ceil(buyer.MaximumPrice)}`);
-    });
+    console.log("\nBuyers:");
+    console.table(Buyers);
 })();
