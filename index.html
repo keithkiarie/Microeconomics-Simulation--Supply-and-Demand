@@ -34,6 +34,14 @@
                 <td>Rounds of Trading:</td>
                 <td><input id="RoundsOfTradingInput" type="number" value="100000"></td>
             </tr>
+            <tr>
+                <td>Buyer chooses Seller randomly:</td>
+                <td><input type="checkbox" id="ChooseRandomSellerInput" checked></td>
+            </tr>
+            <tr>
+                <td>Buyer chooses Seller with best Price:</td>
+                <td><input type="checkbox" id="ChooseBestPriceInput"></td>
+            </tr>
 
         </table>
         <a href="#OutputDiv" id="RunSimulationBtn" class="btn" style="color:bisque">Run Simulation</a>
@@ -60,7 +68,8 @@
         <h6>Buyers:</h6>
 
         <small style="color: white"><i>Sort By:</i></small>
-        <select name="BuyersDisplayFilter" id="BuyersDisplayFilter" class="form-control" style="width:20%; background-color:black; color: white;">
+        <select name="BuyersDisplayFilter" id="BuyersDisplayFilter" class="form-control"
+            style="width:20%; background-color:black; color: white;">
             <option value="MaximumPayable">Maximum Can Pay</option>
             <option value="Transactions">Transactions Accepted</option>
             <option value="TotalSpent">Total Spent</option>
@@ -79,9 +88,10 @@
 
 
         <h6>Sellers:</h6>
-        
+
         <small style="color: white"><i>Sort By:</i></small>
-        <select name="SellersDisplayFilter" id="SellersDisplayFilter" class="form-control" style="width:20%; background-color:black; color: white">
+        <select name="SellersDisplayFilter" id="SellersDisplayFilter" class="form-control"
+            style="width:20%; background-color:black; color: white">
             <option value="MinimumAcceptable">Minimum Can Accept</option>
             <option value="FirstPrice">First Price</option>
             <option value="Price">Final Price</option>
@@ -117,6 +127,8 @@
     const MetaTbody = document.getElementById("MetaTbody");
     const BuyersDisplayFilter = document.getElementById("BuyersDisplayFilter");
     const SellersDisplayFilter = document.getElementById("SellersDisplayFilter");
+    const ChooseRandomSellerInput = document.getElementById("ChooseRandomSellerInput");
+    const ChooseBestPriceInput = document.getElementById("ChooseBestPriceInput");
 
     function GetNumberOfBuyers() {
         let Default = 1;
@@ -154,6 +166,10 @@
 
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function HowToChooseSeller() {
+        return (ChooseRandomSellerInput.checked) ? "Random" : "BestPrice";
     }
 </script>
 

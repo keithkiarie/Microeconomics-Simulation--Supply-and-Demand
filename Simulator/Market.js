@@ -2,6 +2,7 @@ let NumberOfBuyers = GetNumberOfBuyers();
 let NumberOfSellers = GetNumberOfSellers();
 let RoundsOfTrading = GetNumberOfTradingRounds();
 
+
 let Buyers = [];
 let Sellers = [];
 
@@ -23,7 +24,13 @@ function Trade(Rounds) {
 
     for (let Round = 0; Round < Rounds; Round++) {
         Buyers.forEach(buyer => {
-            let seller = GetRandomSeller();
+            let seller;
+            if (HowToChooseSeller() == "Random") {
+                seller = GetRandomSeller();
+            } else {
+                seller = Sellers.sort((a, b) => a.Price - b.Price)[0];
+            }
+            
 
             if (seller.Price <= buyer.MaximumPayable) {
                 // successful transaction
