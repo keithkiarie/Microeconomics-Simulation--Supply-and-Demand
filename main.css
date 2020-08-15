@@ -1,0 +1,7 @@
+body, table {
+    color: bisque;
+}
+
+html {
+    scroll-behavior: smooth;
+  }

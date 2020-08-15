@@ -10,15 +10,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="main.css">
 </head>
 
-<body>
+<body style="background-color: black; color:bisque">
+
     <h2 style="text-align: center;">Demand & Supply</h2>
     <h3 style="text-align: center;">Simulating a Microeconomic Environment</h3>
 
     <br>
     <div id="ControlsDiv" style="margin-left: 2%;">
-        <table class="table" style="width: 40%;">
+        <table class="table" style="width: 40%; color: bisque;">
             <tr>
                 <td>Number of Buyers:</td>
                 <td><input id="NoOfBuyersInput" type="number" value="1"></td>
@@ -33,7 +36,7 @@
             </tr>
 
         </table>
-        <button id="RunSimulationBtn">Run Simulation</button>
+        <a href="#OutputDiv" id="RunSimulationBtn" class="btn" style="color:bisque">Run Simulation</a>
     </div>
     <br><br>
 
@@ -42,8 +45,8 @@
     <div id="OutputDiv" style="display: none; margin-left: 6%;">
 
         <h6>Meta:</h6>
-        <table class="table" style="width: 50%;">
-            <tr>
+        <table class="table" style="width: 50%; color: white;">
+            <tr style="color:bisque">
                 <th>Rounds of Trading</th>
                 <th>Number of Buyers</th>
                 <th>Number of Sellers</th>
@@ -55,8 +58,8 @@
         <br><br>
 
         <h6>Buyers:</h6>
-        <table class="table" style="width: 90%;">
-            <tr>
+        <table class="table" style="width: 90%; color: white;">
+            <tr style="color:bisque">
                 <th>Maximum can Pay</th>
                 <th>Transactions Accepted (%)</th>
                 <th>Total Spent</th>
@@ -67,8 +70,8 @@
 
 
         <h6>Sellers:</h6>
-        <table class="table" style="width: 90%;">
-            <tr>
+        <table class="table" style="width: 90%; color: white;">
+            <tr style="color:bisque">
                 <th>Minimum can Accept</td>
                 <th>First Price</th>
                 <th>Final Price</th>
