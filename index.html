@@ -24,23 +24,30 @@
         <table class="table" style="width: 40%; color: bisque;">
             <tr>
                 <td>Number of Buyers:</td>
-                <td><input id="NoOfBuyersInput" type="number" value="20"></td>
+                <td>
+                    <input id="NoOfBuyersInput" type="number" value="20" class="form-control" style="background-color: black; width: 70%;">
+                </td>
             </tr>
             <tr>
                 <td>Number of Sellers:</td>
-                <td><input id="NoOfSellersInput" type="number" value="20"></td>
+                <td>
+                    <input id="NoOfSellersInput" type="number" value="20" class="form-control" style="background-color: black; width: 70%;">
+                </td>
             </tr>
             <tr>
                 <td>Rounds of Trading:</td>
-                <td><input id="RoundsOfTradingInput" type="number" value="100000"></td>
+                <td>
+                    <input id="RoundsOfTradingInput" type="number" value="100000" class="form-control" style="background-color: black; width: 70%;">
+                </td>
             </tr>
             <tr>
-                <td>Buyer chooses Seller randomly:</td>
-                <td><input type="checkbox" id="ChooseRandomSellerInput" checked></td>
-            </tr>
-            <tr>
-                <td>Buyer chooses Seller with best Price:</td>
-                <td><input type="checkbox" id="ChooseBestPriceInput"></td>
+                <td>How buyer chooses seller:</td>
+                <td>
+                    <select name="HowBuyerChoosesSellerInput" id="HowBuyerChoosesSellerInput" class="form-control" style="background-color: black; width: 70%;">
+                        <option value="CheapestPrice">Cheapest price</option>
+                        <option value="Randomly">Randomly</option>
+                    </select>
+                </td>
             </tr>
 
         </table>
@@ -58,6 +65,7 @@
                 <th>Rounds of Trading</th>
                 <th>Number of Buyers</th>
                 <th>Number of Sellers</th>
+                <th>How Buyer chooses a Seller</th>
                 <th>Number of Transactions</th>
                 <th>Total Spent</th>
             </tr>
@@ -127,8 +135,7 @@
     const MetaTbody = document.getElementById("MetaTbody");
     const BuyersDisplayFilter = document.getElementById("BuyersDisplayFilter");
     const SellersDisplayFilter = document.getElementById("SellersDisplayFilter");
-    const ChooseRandomSellerInput = document.getElementById("ChooseRandomSellerInput");
-    const ChooseBestPriceInput = document.getElementById("ChooseBestPriceInput");
+    const HowBuyerChoosesSellerInput = document.getElementById("HowBuyerChoosesSellerInput");
 
     function GetNumberOfBuyers() {
         let Default = 1;
@@ -169,7 +176,7 @@
     }
 
     function HowToChooseSeller() {
-        return (ChooseRandomSellerInput.checked) ? "Random" : "BestPrice";
+        return HowBuyerChoosesSellerInput.value;
     }
 </script>
 

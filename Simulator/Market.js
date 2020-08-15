@@ -70,11 +70,13 @@ function DisplayOutput() {
     let TotalSpent = 0;
     Buyers.forEach(buyer => TotalSpent += buyer.TotalSpent);
 
+    // display meta data
     MetaTbody.innerHTML = `
         <tr>
             <td>${numberWithCommas(RoundsOfTrading)}</td>
             <td>${numberWithCommas(NumberOfBuyers)}</td>
             <td>${numberWithCommas(NumberOfSellers)}</td>
+            <td>${HowToChooseSeller() == "Randomly" ? "Randomly" : "Cheapest Price"}</td>
             <td>${numberWithCommas(Transactions)}</td>
             <td>${numberWithCommas(Math.round(TotalSpent))}</td>
         </tr>
