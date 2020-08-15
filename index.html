@@ -24,15 +24,15 @@
         <table class="table" style="width: 40%; color: bisque;">
             <tr>
                 <td>Number of Buyers:</td>
-                <td><input id="NoOfBuyersInput" type="number" value="1"></td>
+                <td><input id="NoOfBuyersInput" type="number" value="20"></td>
             </tr>
             <tr>
                 <td>Number of Sellers:</td>
-                <td><input id="NoOfSellersInput" type="number" value="1"></td>
+                <td><input id="NoOfSellersInput" type="number" value="20"></td>
             </tr>
             <tr>
                 <td>Rounds of Trading:</td>
-                <td><input id="RoundsOfTradingInput" type="number" value="1000000"></td>
+                <td><input id="RoundsOfTradingInput" type="number" value="100000"></td>
             </tr>
 
         </table>
@@ -58,7 +58,9 @@
         <br><br>
 
         <h6>Buyers:</h6>
-        <select name="BuyersDisplayFilter" id="BuyersDisplayFilter" class="form-control" style="width:15%; background-color:black;">
+
+        <small style="color: white"><i>Sort By:</i></small>
+        <select name="BuyersDisplayFilter" id="BuyersDisplayFilter" class="form-control" style="width:20%; background-color:black; color: white;">
             <option value="MaximumPayable">Maximum Can Pay</option>
             <option value="Transactions">Transactions Accepted</option>
             <option value="TotalSpent">Total Spent</option>
@@ -77,8 +79,20 @@
 
 
         <h6>Sellers:</h6>
+        
+        <small style="color: white"><i>Sort By:</i></small>
+        <select name="SellersDisplayFilter" id="SellersDisplayFilter" class="form-control" style="width:20%; background-color:black; color: white">
+            <option value="MinimumAcceptable">Minimum Can Accept</option>
+            <option value="FirstPrice">First Price</option>
+            <option value="Price">Final Price</option>
+            <option value="SummedPrices">Average Price</option>
+            <option value="Transactions">Transactions Accepted</option>
+            <option value="Revenue">Revenue</option>
+        </select>
+
         <table class="table" style="width: 90%; color: white;">
             <tr style="color:bisque">
+                <td>Position</td>
                 <th>Minimum can Accept</td>
                 <th>First Price</th>
                 <th>Final Price</th>
@@ -102,6 +116,7 @@
     const SellersTbody = document.getElementById("SellersTbody");
     const MetaTbody = document.getElementById("MetaTbody");
     const BuyersDisplayFilter = document.getElementById("BuyersDisplayFilter");
+    const SellersDisplayFilter = document.getElementById("SellersDisplayFilter");
 
     function GetNumberOfBuyers() {
         let Default = 1;

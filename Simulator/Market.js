@@ -73,10 +73,9 @@ function DisplayOutput() {
         </tr>
     `;
 
+    // display buyers
     BuyersTbody.innerHTML = "";
-
-    BuyersToDisplay = ChooseBuyersToShow();
-
+    let BuyersToDisplay = ChooseBuyersToShow();
     BuyersToDisplay.forEach(buyer => {
         BuyersTbody.innerHTML += `
             <tr>
@@ -88,10 +87,14 @@ function DisplayOutput() {
         `;
     })
 
+
+    // display sellers
     SellersTbody.innerHTML = "";
-    Sellers.forEach(seller => {
+    let SellersToDisplay = ChooseSellersToShow();
+    SellersToDisplay.forEach(seller => {
         SellersTbody.innerHTML += `
             <tr>
+                <td>${seller.Position}</td>
                 <td>${numberWithCommas(seller.MinimumAcceptable)}</td>
                 <td>${numberWithCommas(seller.FirstPrice)}</td>
                 <td>${numberWithCommas(seller.Price)}</td>
@@ -121,6 +124,23 @@ function ChooseBuyersToShow() {
     }
     
     return BuyersToDisplay;
+}
+
+function ChooseSellersToShow() {
+    let SellersToDisplay = Sellers;
+
+    SellersToDisplay.sort((a, b) => b[SellersDisplayFilter.value] - a[SellersDisplayFilter.value]);
+
+    for (let i = 0; i < SellersToDisplay.length; i++) SellersToDisplay[i].Position = i + 1; // give them positions
+    
+    if (Sellers.length > 10) {
+        let FirstFive = Sellers.slice(0, 5);
+        SellersToDisplay = FirstFive;
+        let LastFive = Sellers.slice(Sellers.length - 5);
+        LastFive.forEach(item => SellersToDisplay.push(item));
+    }
+    
+    return SellersToDisplay;
 }
 
 function StartMarket() {
