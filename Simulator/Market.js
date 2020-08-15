@@ -38,6 +38,8 @@ function Trade(Rounds) {
                 buyer.CompleteTransaction(false);
             }
         });
+
+        Sellers.forEach(seller => seller.SummedPrices += seller.Price);
     }
 }
 
@@ -63,21 +65,25 @@ function DisplayOutput() {
 
     MetaTbody.innerHTML = `
         <tr>
-            <td>${RoundsOfTrading}</td>
-            <td>${NumberOfBuyers}</td>
-            <td>${NumberOfSellers}</td>
-            <td>${Transactions}</td>
-            <td>${Math.round(TotalSpent)}</td>
+            <td>${numberWithCommas(RoundsOfTrading)}</td>
+            <td>${numberWithCommas(NumberOfBuyers)}</td>
+            <td>${numberWithCommas(NumberOfSellers)}</td>
+            <td>${numberWithCommas(Transactions)}</td>
+            <td>${numberWithCommas(Math.round(TotalSpent))}</td>
         </tr>
     `;
 
     BuyersTbody.innerHTML = "";
-    Buyers.forEach(buyer => {
+
+    BuyersToDisplay = ChooseBuyersToShow();
+
+    BuyersToDisplay.forEach(buyer => {
         BuyersTbody.innerHTML += `
             <tr>
-                <td>${buyer.MaximumPayable}</td>
+                <td>${buyer.Position}</td>
+                <td>${numberWithCommas(buyer.MaximumPayable)}</td>
                 <td>${((buyer.Transactions * 100 / Transactions) || 0).toFixed(2)}</td>
-                <td>${Math.round(buyer.TotalSpent)}</td>
+                <td>${numberWithCommas(Math.round(buyer.TotalSpent))}</td>
             </tr>
         `;
     })
@@ -86,15 +92,35 @@ function DisplayOutput() {
     Sellers.forEach(seller => {
         SellersTbody.innerHTML += `
             <tr>
-                <td>${seller.MinimumAcceptable}</td>
-                <td>${seller.FirstPrice}</td>
-                <td>${seller.Price}</td>
-                <td>${Math.round(seller.SummedPrices / RoundsOfTrading)}</td>
+                <td>${numberWithCommas(seller.MinimumAcceptable)}</td>
+                <td>${numberWithCommas(seller.FirstPrice)}</td>
+                <td>${numberWithCommas(seller.Price)}</td>
+                <td>
+                    ${numberWithCommas(Math.round(seller.SummedPrices / RoundsOfTrading))}
+                </td>
                 <td>${((seller.Transactions * 100 / Transactions) || 0).toFixed(2)}</td>
-                <td>${Math.round(seller.Revenue)}</td>
+                <td>${numberWithCommas(Math.round(seller.Revenue))}</td>
             </tr>
         `;
     })
+}
+
+
+function ChooseBuyersToShow() {
+    let BuyersToDisplay = Buyers;
+
+    BuyersToDisplay.sort((a, b) => b[BuyersDisplayFilter.value] - a[BuyersDisplayFilter.value]);
+
+    for (let i = 0; i < BuyersToDisplay.length; i++) BuyersToDisplay[i].Position = i + 1; // give them positions
+    
+    if (Buyers.length > 10) {
+        let FirstFive = Buyers.slice(0, 5);
+        BuyersToDisplay = FirstFive;
+        let LastFive = Buyers.slice(Buyers.length - 5);
+        LastFive.forEach(item => BuyersToDisplay.push(item));
+    }
+    
+    return BuyersToDisplay;
 }
 
 function StartMarket() {

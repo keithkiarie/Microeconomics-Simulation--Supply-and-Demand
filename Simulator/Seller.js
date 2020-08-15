@@ -31,8 +31,6 @@ class Seller {
     }
 
     CompleteTransaction(SuccessfulSale) {
-        this.SummedPrices += this.Price;
-        
         if (SuccessfulSale) {
             this.Transactions++;
             this.Revenue += this.Price; 

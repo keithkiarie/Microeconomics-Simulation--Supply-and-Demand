@@ -58,8 +58,15 @@
         <br><br>
 
         <h6>Buyers:</h6>
+        <select name="BuyersDisplayFilter" id="BuyersDisplayFilter" class="form-control" style="width:15%; background-color:black;">
+            <option value="MaximumPayable">Maximum Can Pay</option>
+            <option value="Transactions">Transactions Accepted</option>
+            <option value="TotalSpent">Total Spent</option>
+        </select>
+
         <table class="table" style="width: 90%; color: white;">
             <tr style="color:bisque">
+                <th>Position</th>
                 <th>Maximum can Pay</th>
                 <th>Transactions Accepted (%)</th>
                 <th>Total Spent</th>
@@ -94,6 +101,7 @@
     const BuyersTbody = document.getElementById("BuyersTbody");
     const SellersTbody = document.getElementById("SellersTbody");
     const MetaTbody = document.getElementById("MetaTbody");
+    const BuyersDisplayFilter = document.getElementById("BuyersDisplayFilter");
 
     function GetNumberOfBuyers() {
         let Default = 1;
@@ -129,6 +137,9 @@
         }
     }
 
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 </script>
 
 <script src="./Simulator/Buyer.js"></script>
