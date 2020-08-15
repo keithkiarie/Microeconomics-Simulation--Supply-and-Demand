@@ -1,3 +1,1 @@
-Market = require("./Simulator/Market.js");
-
-Market();
+RunSimulationBtn.addEventListener("click", StartMarket);

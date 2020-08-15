@@ -1,12 +1,9 @@
-const Buyer = require("./Buyer");
-const Seller = require("./Seller");
+let NumberOfBuyers = GetNumberOfBuyers();
+let NumberOfSellers = GetNumberOfSellers();
+let RoundsOfTrading = GetNumberOfTradingRounds();
 
-const NumberOfBuyers = 15;
-const NumberOfSellers = 15;
-const RoundsOfTrading = 1000000;
-
-const Buyers = [];
-const Sellers = [];
+let Buyers = [];
+let Sellers = [];
 
 let Transactions = 0;
 
@@ -30,11 +27,11 @@ function Trade(Rounds) {
 
             if (seller.Price <= buyer.MaximumPayable) {
                 // successful transaction
+                buyer.CompleteTransaction(true, seller.Price);
                 seller.CompleteTransaction(true);
-                buyer.CompleteTransaction(true);
 
                 Transactions++;
-                
+
             } else {
                 // transaction not successful
                 seller.CompleteTransaction(false);
@@ -44,33 +41,68 @@ function Trade(Rounds) {
     }
 }
 
+function InitializeVariables() {
+    NumberOfBuyers = GetNumberOfBuyers();
+    NumberOfSellers = GetNumberOfSellers();
+    RoundsOfTrading = GetNumberOfTradingRounds();
+
+    Buyers = [];
+    Sellers = [];
+}
 
 // show data about the market
-function AnalyseMarket() {
-    
+function DisplayOutput() {
+
     Sellers.forEach(seller => {
         seller.Price = Math.round(seller.Price);
         seller.PriceAdjustmentFactor.Down = parseFloat(seller.PriceAdjustmentFactor.Down.toFixed(2));
     });
 
-    console.log(`Rounds of trading: ${RoundsOfTrading}\n`);
-    console.log(`Number of buyers: ${NumberOfBuyers}`);
-    console.log(`Number of sellers: ${NumberOfSellers}`);
-    console.log(`Number of transactions: ${Transactions}`);
+    let TotalSpent = 0;
+    Buyers.forEach(buyer => TotalSpent += buyer.TotalSpent);
 
-    console.log("\nSellers:");
-    console.table(Sellers);
+    MetaTbody.innerHTML = `
+        <tr>
+            <td>${RoundsOfTrading}</td>
+            <td>${NumberOfBuyers}</td>
+            <td>${NumberOfSellers}</td>
+            <td>${Transactions}</td>
+            <td>${Math.round(TotalSpent)}</td>
+        </tr>
+    `;
 
-    console.log("\nBuyers:");
-    console.table(Buyers);
+    BuyersTbody.innerHTML = "";
+    Buyers.forEach(buyer => {
+        BuyersTbody.innerHTML += `
+            <tr>
+                <td>${buyer.MaximumPayable}</td>
+                <td>${((buyer.Transactions * 100 / Transactions) || 0).toFixed(2)}</td>
+                <td>${Math.round(buyer.TotalSpent)}</td>
+            </tr>
+        `;
+    })
+
+    SellersTbody.innerHTML = "";
+    Sellers.forEach(seller => {
+        SellersTbody.innerHTML += `
+            <tr>
+                <td>${seller.MinimumAcceptable}</td>
+                <td>${seller.FirstPrice}</td>
+                <td>${seller.Price}</td>
+                <td>${Math.round(seller.SummedPrices / RoundsOfTrading)}</td>
+                <td>${((seller.Transactions * 100 / Transactions) || 0).toFixed(2)}</td>
+                <td>${Math.round(seller.Revenue)}</td>
+            </tr>
+        `;
+    })
 }
-
-
 
 function StartMarket() {
+    InitializeVariables();
     CreateTraders();
     Trade(RoundsOfTrading);
-    AnalyseMarket();
-}
 
-module.exports = StartMarket;
+    OutputDiv.style.display = "block";
+
+    DisplayOutput();
+}

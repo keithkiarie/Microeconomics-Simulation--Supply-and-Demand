@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demand & Supply - Simulator</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <h2 style="text-align: center;">Demand & Supply</h2>
+    <h3 style="text-align: center;">Simulating a Microeconomic Environment</h3>
+
+    <br>
+    <div id="ControlsDiv" style="margin-left: 2%;">
+        <table class="table" style="width: 40%;">
+            <tr>
+                <td>Number of Buyers:</td>
+                <td><input id="NoOfBuyersInput" type="number" value="1"></td>
+            </tr>
+            <tr>
+                <td>Number of Sellers:</td>
+                <td><input id="NoOfSellersInput" type="number" value="1"></td>
+            </tr>
+            <tr>
+                <td>Rounds of Trading:</td>
+                <td><input id="RoundsOfTradingInput" type="number" value="1000000"></td>
+            </tr>
+
+        </table>
+        <button id="RunSimulationBtn">Run Simulation</button>
+    </div>
+    <br><br>
+
+
+    <!-- Output display area -->
+    <div id="OutputDiv" style="display: none; margin-left: 6%;">
+
+        <h6>Meta:</h6>
+        <table class="table" style="width: 50%;">
+            <tr>
+                <th>Rounds of Trading</th>
+                <th>Number of Buyers</th>
+                <th>Number of Sellers</th>
+                <th>Number of Transactions</th>
+                <th>Total Spent</th>
+            </tr>
+            <tbody id="MetaTbody"></tbody>
+        </table>
+        <br><br>
+
+        <h6>Buyers:</h6>
+        <table class="table" style="width: 90%;">
+            <tr>
+                <th>Maximum can Pay</th>
+                <th>Transactions Accepted (%)</th>
+                <th>Total Spent</th>
+            </tr>
+            <tbody id="BuyersTbody"></tbody>
+        </table>
+        <br>
+
+
+        <h6>Sellers:</h6>
+        <table class="table" style="width: 90%;">
+            <tr>
+                <th>Minimum can Accept</td>
+                <th>First Price</th>
+                <th>Final Price</th>
+                <th>Average Price</th>
+                <th>Transactions Accepted (%)</th>
+                <th>Revenue</th>
+            </tr>
+            <tbody id="SellersTbody"></tbody>
+        </table>
+    </div>
+
+</body>
+
+<script>
+    const RunSimulationBtn = document.getElementById("RunSimulationBtn");
+    const NoOfBuyersInput = document.getElementById("NoOfBuyersInput");
+    const NoOfSellersInput = document.getElementById("NoOfSellersInput");
+    const RoundsOfTradingInput = document.getElementById("RoundsOfTradingInput");
+    const OutputDiv = document.getElementById("OutputDiv");
+    const BuyersTbody = document.getElementById("BuyersTbody");
+    const SellersTbody = document.getElementById("SellersTbody");
+    const MetaTbody = document.getElementById("MetaTbody");
+
+    function GetNumberOfBuyers() {
+        let Default = 1;
+        let NoOfBuyers = parseInt(document.getElementById("NoOfBuyersInput").value);
+
+        if (NoOfBuyers < 1 || isNaN(NoOfBuyers)) {
+            NoOfBuyersInput.value = Default;
+            return Default;
+        } else {
+            return NoOfBuyers;
+        }
+    }
+    function GetNumberOfSellers() {
+        let Default = 1;
+        let NoOfSellers = parseInt(document.getElementById("NoOfSellersInput").value);
+
+        if (NoOfSellers < 1 || isNaN(NoOfSellers)) {
+            NoOfSellersInput.value = Default;
+            return Default;
+        } else {
+            return NoOfSellers;
+        }
+    }
+    function GetNumberOfTradingRounds() {
+        let Default = 1000000;
+        let NoOfRounds = parseInt(document.getElementById("RoundsOfTradingInput").value);
+
+        if (NoOfRounds < 1 || isNaN(NoOfRounds)) {
+            RoundsOfTradingInput.value = Default;
+            return Default;
+        } else {
+            return NoOfRounds;
+        }
+    }
+
+</script>
+
+<script src="./Simulator/Buyer.js"></script>
+<script src="./Simulator/Seller.js"></script>
+<script src="./Simulator/Market.js"></script>
+
+<script src="app.js"></script>
+
+</html>
