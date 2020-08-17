@@ -25,19 +25,19 @@
             <tr>
                 <td>Number of Buyers:</td>
                 <td>
-                    <input id="NoOfBuyersInput" type="number" value="20" class="form-control" style="background-color: black; width: 70%;">
+                    <input id="NoOfBuyersInput" type="number" value="50" class="form-control" style="background-color: black; width: 70%;">
                 </td>
             </tr>
             <tr>
                 <td>Number of Sellers:</td>
                 <td>
-                    <input id="NoOfSellersInput" type="number" value="20" class="form-control" style="background-color: black; width: 70%;">
+                    <input id="NoOfSellersInput" type="number" value="50" class="form-control" style="background-color: black; width: 70%;">
                 </td>
             </tr>
             <tr>
                 <td>Rounds of Trading:</td>
                 <td>
-                    <input id="RoundsOfTradingInput" type="number" value="100000" class="form-control" style="background-color: black; width: 70%;">
+                    <input id="RoundsOfTradingInput" type="number" value="10000" class="form-control" style="background-color: black; width: 70%;">
                 </td>
             </tr>
             <tr>
@@ -150,7 +150,7 @@
     const StatsTbody = document.getElementById("StatsTbody");
 
     function GetNumberOfBuyers() {
-        let Default = 1;
+        let Default = 50;
         let NoOfBuyers = parseInt(document.getElementById("NoOfBuyersInput").value);
 
         if (NoOfBuyers < 1 || isNaN(NoOfBuyers)) {
@@ -161,7 +161,7 @@
         }
     }
     function GetNumberOfSellers() {
-        let Default = 1;
+        let Default = 50;
         let NoOfSellers = parseInt(document.getElementById("NoOfSellersInput").value);
 
         if (NoOfSellers < 1 || isNaN(NoOfSellers)) {
@@ -172,7 +172,7 @@
         }
     }
     function GetNumberOfTradingRounds() {
-        let Default = 1000000;
+        let Default = 10000;
         let NoOfRounds = parseInt(document.getElementById("RoundsOfTradingInput").value);
 
         if (NoOfRounds < 1 || isNaN(NoOfRounds)) {
