@@ -30,6 +30,9 @@ function DisplayOutput() {
     let TotalSpent = 0;
     Buyers.forEach(buyer => TotalSpent += buyer.TotalSpent);
 
+    let TotalProfit = 0;
+    Sellers.forEach(seller => TotalProfit += seller.Profit);
+
     // display meta data
     MetaTbody.innerHTML = `
         <tr>
@@ -43,7 +46,7 @@ function DisplayOutput() {
     StatsTbody.innerHTML = `
         <tr>
             <td>${numberWithCommas(Transactions)}</td>
-            <td>${numberWithCommas(Math.round(TotalSpent))}</td>
+            <td>${numberWithCommas(Math.round(TotalProfit * 100 / TotalSpent))}%</td>
             <td>${numberWithCommas(GetAverageFirstPrice())}</td>
             <td>${numberWithCommas(GetMedianFirstPrice())}</td>
             <td>${numberWithCommas(GetAveragePrice())}</td>
@@ -81,6 +84,7 @@ function DisplayOutput() {
                 </td>
                 <td>${((seller.Transactions * 100 / Transactions) || 0).toFixed(2)}</td>
                 <td>${numberWithCommas(Math.round(seller.Revenue))}</td>
+                <td>${numberWithCommas(Math.round(seller.Profit))}</td>
             </tr>
         `;
     })

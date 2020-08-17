@@ -7,6 +7,7 @@ class Seller {
 
     Transactions = 0;
     Revenue = 0;
+    Profit = 0;
 
     PriceAdjustmentFactor = {
         Up: (21/20),
@@ -33,7 +34,8 @@ class Seller {
     CompleteTransaction(SuccessfulSale) {
         if (SuccessfulSale) {
             this.Transactions++;
-            this.Revenue += this.Price; 
+            this.Revenue += this.Price;
+            this.Profit += this.Price - this.MinimumAcceptable; 
         }
         this.AdjustPrice(SuccessfulSale);
     }

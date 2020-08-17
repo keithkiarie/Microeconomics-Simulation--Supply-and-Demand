@@ -84,7 +84,7 @@
                 <table class="table" style="color: white; width: 90%;">
                     <tr style="color:bisque">
                         <th>Number of Transactions</th>
-                        <th>Total Spent</th>
+                        <th>Overall Profit Margin</th>
                         <th>Average First Price</th>
                         <th>Median First Price</th>
                         <th>Average Final Price</th>
@@ -101,24 +101,26 @@
             <small style="color: white"><i>Sort By:</i></small>
             <select name="SellersDisplayFilter" id="SellersDisplayFilter" class="form-control"
                 style="width:auto; background-color:black; color: white">
-                <option value="MinimumAcceptable">Minimum Can Accept</option>
+                <option value="MinimumAcceptable">Production Cost</option>
                 <option value="FirstPrice">First Price</option>
                 <option value="Price">Final Price</option>
                 <option value="SummedPrices">Average Price</option>
                 <option value="Transactions">Transactions Accepted</option>
                 <option value="Revenue">Revenue</option>
+                <option value="Profit">Profit</option>
             </select>
 
             <div style="overflow-x: auto;">
                 <table class="table" style="width: 90%; color: white;">
                     <tr style="color:bisque">
                         <td>Position</td>
-                        <th>Minimum can Accept</td>
+                        <th>Production Cost</td>
                         <th>First Price</th>
                         <th>Final Price</th>
                         <th>Average Price</th>
                         <th>Transactions Accepted (%)</th>
                         <th>Revenue</th>
+                        <th>Profit</th>
                     </tr>
                     <tbody id="SellersTbody"></tbody>
                 </table>
