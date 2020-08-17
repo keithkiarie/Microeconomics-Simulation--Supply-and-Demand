@@ -60,16 +60,27 @@
     <div id="OutputDiv" style="display: none; margin-left: 6%;">
 
         <h6>Meta:</h6>
-        <table class="table" style="width: 50%; color: white;">
+        <table class="table" style="color: white;">
             <tr style="color:bisque">
                 <th>Rounds of Trading</th>
                 <th>Number of Buyers</th>
                 <th>Number of Sellers</th>
                 <th>How Buyer chooses a Seller</th>
-                <th>Number of Transactions</th>
-                <th>Total Spent</th>
             </tr>
             <tbody id="MetaTbody"></tbody>
+        </table>
+        <br>
+
+        <table class="table" style="color: white;">
+            <tr style="color:bisque">
+                <th>Number of Transactions</th>
+                <th>Total Spent</th>
+                <th>Average First Price</th>
+                <th>Median First Price</th>
+                <th>Average Final Price</th>
+                <th>Median Final Price</th>
+            </tr>
+            <tbody id="StatsTbody"></tbody>
         </table>
         <br><br>
 
@@ -136,6 +147,7 @@
     const BuyersDisplayFilter = document.getElementById("BuyersDisplayFilter");
     const SellersDisplayFilter = document.getElementById("SellersDisplayFilter");
     const HowBuyerChoosesSellerInput = document.getElementById("HowBuyerChoosesSellerInput");
+    const StatsTbody = document.getElementById("StatsTbody");
 
     function GetNumberOfBuyers() {
         let Default = 1;

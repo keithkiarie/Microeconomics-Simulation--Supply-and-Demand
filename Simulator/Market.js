@@ -77,8 +77,17 @@ function DisplayOutput() {
             <td>${numberWithCommas(NumberOfBuyers)}</td>
             <td>${numberWithCommas(NumberOfSellers)}</td>
             <td>${HowToChooseSeller() == "Randomly" ? "Randomly" : "Cheapest Price"}</td>
+        </tr>
+    `;
+    // display stats
+    StatsTbody.innerHTML = `
+        <tr>
             <td>${numberWithCommas(Transactions)}</td>
             <td>${numberWithCommas(Math.round(TotalSpent))}</td>
+            <td>${numberWithCommas(GetAverageFirstPrice())}</td>
+            <td>${numberWithCommas(GetMedianFirstPrice())}</td>
+            <td>${numberWithCommas(GetAveragePrice())}</td>
+            <td>${numberWithCommas(GetMedianPrice())}</td>
         </tr>
     `;
 
@@ -150,6 +159,43 @@ function ChooseSellersToShow() {
     }
     
     return SellersToDisplay;
+}
+
+
+// Stats
+
+function GetAverageFirstPrice() {
+    let Total = 0;
+    Sellers.forEach(seller => Total += seller.FirstPrice);
+    
+    return Math.round(Total / Sellers.length);
+}
+
+function GetAveragePrice() {
+    let Total = 0;
+    Sellers.forEach(seller => Total += seller.Price);
+    
+    return Math.round(Total / Sellers.length);
+}
+
+function GetMedianFirstPrice() {
+    Sellers.sort((a, b) => a.FirstPrice - b.FirstPrice);
+
+    let Median;
+    if (Sellers.length % 2 == 0) Median = (Sellers[(Sellers.length / 2)].FirstPrice + Sellers[(Sellers.length / 2) + 1].FirstPrice) / 2;
+    else Median = Sellers[Math.ceil(Sellers.length / 2)].FirstPrice;
+
+    return Math.round(Median);
+}
+
+function GetMedianPrice() {
+    Sellers.sort((a, b) => a.Price - b.Price);
+
+    let Median;
+    if (Sellers.length % 2 == 0) Median = (Sellers[(Sellers.length / 2)].Price + Sellers[(Sellers.length / 2) + 1].Price) / 2;
+    else Median = Sellers[Math.ceil(Sellers.length / 2)].Price;
+
+    return Math.round(Median);
 }
 
 function StartMarket() {
