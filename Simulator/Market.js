@@ -8,47 +8,7 @@ let Sellers = [];
 
 let Transactions = 0;
 
-function CreateTraders() {
-    for (let i = 0; i < NumberOfBuyers; i++) Buyers.push(new Buyer);
-    for (let i = 0; i < NumberOfSellers; i++) Sellers.push(new Seller);
-}
 
-function GetRandomSeller() {
-    let RandomSeller = Math.round(Math.random() * (Sellers.length - 1));
-    return Sellers[RandomSeller];
-}
-
-
-// buyer and seller attempt to do a transction
-function Trade(Rounds) {
-
-    for (let Round = 0; Round < Rounds; Round++) {
-        Buyers.forEach(buyer => {
-            let seller;
-            if (HowToChooseSeller() == "Random") {
-                seller = GetRandomSeller();
-            } else {
-                seller = Sellers.sort((a, b) => a.Price - b.Price)[0];
-            }
-            
-
-            if (seller.Price <= buyer.MaximumPayable) {
-                // successful transaction
-                buyer.CompleteTransaction(true, seller.Price);
-                seller.CompleteTransaction(true);
-
-                Transactions++;
-
-            } else {
-                // transaction not successful
-                seller.CompleteTransaction(false);
-                buyer.CompleteTransaction(false);
-            }
-        });
-
-        Sellers.forEach(seller => seller.SummedPrices += seller.Price);
-    }
-}
 
 function InitializeVariables() {
     NumberOfBuyers = GetNumberOfBuyers();
@@ -133,14 +93,14 @@ function ChooseBuyersToShow() {
     BuyersToDisplay.sort((a, b) => b[BuyersDisplayFilter.value] - a[BuyersDisplayFilter.value]);
 
     for (let i = 0; i < BuyersToDisplay.length; i++) BuyersToDisplay[i].Position = i + 1; // give them positions
-    
+
     if (Buyers.length > 10) {
         let FirstFive = Buyers.slice(0, 5);
         BuyersToDisplay = FirstFive;
         let LastFive = Buyers.slice(Buyers.length - 5);
         LastFive.forEach(item => BuyersToDisplay.push(item));
     }
-    
+
     return BuyersToDisplay;
 }
 
@@ -150,14 +110,14 @@ function ChooseSellersToShow() {
     SellersToDisplay.sort((a, b) => b[SellersDisplayFilter.value] - a[SellersDisplayFilter.value]);
 
     for (let i = 0; i < SellersToDisplay.length; i++) SellersToDisplay[i].Position = i + 1; // give them positions
-    
+
     if (Sellers.length > 10) {
         let FirstFive = Sellers.slice(0, 5);
         SellersToDisplay = FirstFive;
         let LastFive = Sellers.slice(Sellers.length - 5);
         LastFive.forEach(item => SellersToDisplay.push(item));
     }
-    
+
     return SellersToDisplay;
 }
 
@@ -167,14 +127,14 @@ function ChooseSellersToShow() {
 function GetAverageFirstPrice() {
     let Total = 0;
     Sellers.forEach(seller => Total += seller.FirstPrice);
-    
+
     return Math.round(Total / Sellers.length);
 }
 
 function GetAveragePrice() {
     let Total = 0;
     Sellers.forEach(seller => Total += seller.Price);
-    
+
     return Math.round(Total / Sellers.length);
 }
 
@@ -199,11 +159,28 @@ function GetMedianPrice() {
 }
 
 function StartMarket() {
+
+    RunSimulationBtn.innerHTML = "Running...";
+
     InitializeVariables();
-    CreateTraders();
-    Trade(RoundsOfTrading);
 
-    OutputDiv.style.display = "block";
+    //create a worker to do the trading
+    let TradeWorker = new Worker("Simulator/Trade.js");
+    TradeWorker.postMessage({
+        NumberOfBuyers: NumberOfBuyers,
+        NumberOfSellers: NumberOfSellers,
+        HowToChooseSeller: HowToChooseSeller(),
+        RoundsOfTrading: RoundsOfTrading
+    })
 
-    DisplayOutput();
+    // after trading done
+    TradeWorker.onmessage = function (e) {
+        Sellers = e.data.Sellers;
+        Buyers = e.data.Buyers;
+        Transactions = e.data.Transactions;
+
+        DisplayOutput();
+        OutputDiv.style.visibility = "visible";
+        RunSimulationBtn.innerHTML = "Run Simulation";
+    }
 }

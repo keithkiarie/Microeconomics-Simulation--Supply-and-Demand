@@ -37,7 +37,7 @@
             <tr>
                 <td>Rounds of Trading:</td>
                 <td>
-                    <input id="RoundsOfTradingInput" type="number" value="10000" class="form-control" style="background-color: black; width: 70%;">
+                    <input id="RoundsOfTradingInput" type="number" value="1000" class="form-control" style="background-color: black; width: 70%;">
                 </td>
             </tr>
             <tr>
@@ -57,7 +57,7 @@
 
 
     <!-- Output display area -->
-    <div id="OutputDiv" style="display: none; margin-left: 6%;">
+    <div id="OutputDiv" style="visibility: hidden; margin-left: 6%;">
 
         <h6>Meta:</h6>
         <table class="table" style="color: white;">
@@ -135,65 +135,7 @@
 
 </body>
 
-<script>
-    const RunSimulationBtn = document.getElementById("RunSimulationBtn");
-    const NoOfBuyersInput = document.getElementById("NoOfBuyersInput");
-    const NoOfSellersInput = document.getElementById("NoOfSellersInput");
-    const RoundsOfTradingInput = document.getElementById("RoundsOfTradingInput");
-    const OutputDiv = document.getElementById("OutputDiv");
-    const BuyersTbody = document.getElementById("BuyersTbody");
-    const SellersTbody = document.getElementById("SellersTbody");
-    const MetaTbody = document.getElementById("MetaTbody");
-    const BuyersDisplayFilter = document.getElementById("BuyersDisplayFilter");
-    const SellersDisplayFilter = document.getElementById("SellersDisplayFilter");
-    const HowBuyerChoosesSellerInput = document.getElementById("HowBuyerChoosesSellerInput");
-    const StatsTbody = document.getElementById("StatsTbody");
-
-    function GetNumberOfBuyers() {
-        let Default = 50;
-        let NoOfBuyers = parseInt(document.getElementById("NoOfBuyersInput").value);
-
-        if (NoOfBuyers < 1 || isNaN(NoOfBuyers)) {
-            NoOfBuyersInput.value = Default;
-            return Default;
-        } else {
-            return NoOfBuyers;
-        }
-    }
-    function GetNumberOfSellers() {
-        let Default = 50;
-        let NoOfSellers = parseInt(document.getElementById("NoOfSellersInput").value);
-
-        if (NoOfSellers < 1 || isNaN(NoOfSellers)) {
-            NoOfSellersInput.value = Default;
-            return Default;
-        } else {
-            return NoOfSellers;
-        }
-    }
-    function GetNumberOfTradingRounds() {
-        let Default = 10000;
-        let NoOfRounds = parseInt(document.getElementById("RoundsOfTradingInput").value);
-
-        if (NoOfRounds < 1 || isNaN(NoOfRounds)) {
-            RoundsOfTradingInput.value = Default;
-            return Default;
-        } else {
-            return NoOfRounds;
-        }
-    }
-
-    function numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-    function HowToChooseSeller() {
-        return HowBuyerChoosesSellerInput.value;
-    }
-</script>
-
-<script src="./Simulator/Buyer.js"></script>
-<script src="./Simulator/Seller.js"></script>
+<script src="index.js"></script>
 <script src="./Simulator/Market.js"></script>
 
 <script src="app.js"></script>
