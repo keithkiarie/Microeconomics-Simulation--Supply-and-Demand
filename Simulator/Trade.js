@@ -32,7 +32,10 @@ function Trade(Rounds, HowToChooseSeller) {
             }
         });
 
-        Sellers.forEach(seller => seller.SummedPrices += seller.Price);
+        Sellers.forEach(seller => {
+            if (!seller.Visited) seller.AdjustPrice(false); //if the seller was not visited, adjust price downwards
+            seller.SummedPrices += seller.Price;
+        });
     }
 }
 

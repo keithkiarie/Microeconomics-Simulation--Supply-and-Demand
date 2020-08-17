@@ -9,6 +9,8 @@ class Seller {
     Revenue = 0;
     Profit = 0;
 
+    Visited = false; // whether a customer visited the seller
+
     PriceAdjustmentFactor = {
         Up: (21/20),
         Down: (20/21)
@@ -38,6 +40,7 @@ class Seller {
             this.Profit += this.Price - this.MinimumAcceptable; 
         }
         this.AdjustPrice(SuccessfulSale);
+        this.Visited = true;
     }
 
     static GetRandomPrice(ProductionCost) {
