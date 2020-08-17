@@ -65,7 +65,7 @@
 
         <h3 id="OutputDivStatus">Trading...</h3>
         <div id="OutputDivData" style="visibility: hidden;">
-            <h6>Meta:</h6>
+            <h5>Meta:</h5>
 
             <div style="overflow-x: auto;">
                 <table class="table" style="color: white; width: 90%;">
@@ -95,31 +95,8 @@
             </div>
             <br><br>
 
-            <h6>Buyers:</h6>
-
-            <small style="color: white"><i>Sort By:</i></small>
-            <select name="BuyersDisplayFilter" id="BuyersDisplayFilter" class="form-control"
-                style="width:auto; background-color:black; color: white;">
-                <option value="MaximumPayable">Maximum Can Pay</option>
-                <option value="Transactions">Transactions Accepted</option>
-                <option value="TotalSpent">Total Spent</option>
-            </select>
-
-            <div style="overflow-x: auto;">
-                <table class="table" style="width: 90%; color: white;">
-                    <tr style="color:bisque">
-                        <th>Position</th>
-                        <th>Maximum can Pay</th>
-                        <th>Transactions Accepted (%)</th>
-                        <th>Total Spent</th>
-                    </tr>
-                    <tbody id="BuyersTbody"></tbody>
-                </table>
-            </div>
-            <br>
-
-
-            <h6>Sellers:</h6>
+            
+            <h5>Sellers:</h5>
 
             <small style="color: white"><i>Sort By:</i></small>
             <select name="SellersDisplayFilter" id="SellersDisplayFilter" class="form-control"
@@ -146,6 +123,31 @@
                     <tbody id="SellersTbody"></tbody>
                 </table>
             </div>
+
+            <br>
+            <h5>Buyers:</h5>
+
+            <small style="color: white"><i>Sort By:</i></small>
+            <select name="BuyersDisplayFilter" id="BuyersDisplayFilter" class="form-control"
+                style="width:auto; background-color:black; color: white;">
+                <option value="MaximumPayable">Maximum Can Pay</option>
+                <option value="Transactions">Transactions Accepted</option>
+                <option value="TotalSpent">Total Spent</option>
+            </select>
+
+            <div style="overflow-x: auto;">
+                <table class="table" style="width: 90%; color: white;">
+                    <tr style="color:bisque">
+                        <th>Position</th>
+                        <th>Maximum can Pay</th>
+                        <th>Transactions Accepted (%)</th>
+                        <th>Total Spent</th>
+                    </tr>
+                    <tbody id="BuyersTbody"></tbody>
+                </table>
+            </div>
+            <br>
+
         </div>
 
     </div>
