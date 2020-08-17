@@ -25,25 +25,29 @@
             <tr>
                 <td>Number of Buyers:</td>
                 <td>
-                    <input id="NoOfBuyersInput" type="number" value="50" class="form-control" style="background-color: black; width: 70%;">
+                    <input id="NoOfBuyersInput" type="number" value="50" class="form-control"
+                        style="background-color: black; width: 70%;">
                 </td>
             </tr>
             <tr>
                 <td>Number of Sellers:</td>
                 <td>
-                    <input id="NoOfSellersInput" type="number" value="50" class="form-control" style="background-color: black; width: 70%;">
+                    <input id="NoOfSellersInput" type="number" value="50" class="form-control"
+                        style="background-color: black; width: 70%;">
                 </td>
             </tr>
             <tr>
                 <td>Rounds of Trading:</td>
                 <td>
-                    <input id="RoundsOfTradingInput" type="number" value="1000" class="form-control" style="background-color: black; width: 70%;">
+                    <input id="RoundsOfTradingInput" type="number" value="1000" class="form-control"
+                        style="background-color: black; width: 70%;">
                 </td>
             </tr>
             <tr>
                 <td>How buyer chooses seller:</td>
                 <td>
-                    <select name="HowBuyerChoosesSellerInput" id="HowBuyerChoosesSellerInput" class="form-control" style="background-color: black; width: 70%;">
+                    <select name="HowBuyerChoosesSellerInput" id="HowBuyerChoosesSellerInput" class="form-control"
+                        style="background-color: black; width: 70%;">
                         <option value="CheapestPrice">Cheapest price</option>
                         <option value="Randomly">Randomly</option>
                     </select>
@@ -59,78 +63,82 @@
     <!-- Output display area -->
     <div id="OutputDiv" style="visibility: hidden; margin-left: 6%;">
 
-        <h6>Meta:</h6>
-        <table class="table" style="color: white;">
-            <tr style="color:bisque">
-                <th>Rounds of Trading</th>
-                <th>Number of Buyers</th>
-                <th>Number of Sellers</th>
-                <th>How Buyer chooses a Seller</th>
-            </tr>
-            <tbody id="MetaTbody"></tbody>
-        </table>
-        <br>
+        <h3 id="OutputDivStatus">Running...</h3>
+        <div id="OutputDivData" style="visibility: hidden;">
+            <h6>Meta:</h6>
+            <table class="table" style="color: white;">
+                <tr style="color:bisque">
+                    <th>Rounds of Trading</th>
+                    <th>Number of Buyers</th>
+                    <th>Number of Sellers</th>
+                    <th>How Buyer chooses a Seller</th>
+                </tr>
+                <tbody id="MetaTbody"></tbody>
+            </table>
+            <br>
 
-        <table class="table" style="color: white;">
-            <tr style="color:bisque">
-                <th>Number of Transactions</th>
-                <th>Total Spent</th>
-                <th>Average First Price</th>
-                <th>Median First Price</th>
-                <th>Average Final Price</th>
-                <th>Median Final Price</th>
-            </tr>
-            <tbody id="StatsTbody"></tbody>
-        </table>
-        <br><br>
+            <table class="table" style="color: white;">
+                <tr style="color:bisque">
+                    <th>Number of Transactions</th>
+                    <th>Total Spent</th>
+                    <th>Average First Price</th>
+                    <th>Median First Price</th>
+                    <th>Average Final Price</th>
+                    <th>Median Final Price</th>
+                </tr>
+                <tbody id="StatsTbody"></tbody>
+            </table>
+            <br><br>
 
-        <h6>Buyers:</h6>
+            <h6>Buyers:</h6>
 
-        <small style="color: white"><i>Sort By:</i></small>
-        <select name="BuyersDisplayFilter" id="BuyersDisplayFilter" class="form-control"
-            style="width:20%; background-color:black; color: white;">
-            <option value="MaximumPayable">Maximum Can Pay</option>
-            <option value="Transactions">Transactions Accepted</option>
-            <option value="TotalSpent">Total Spent</option>
-        </select>
+            <small style="color: white"><i>Sort By:</i></small>
+            <select name="BuyersDisplayFilter" id="BuyersDisplayFilter" class="form-control"
+                style="width:20%; background-color:black; color: white;">
+                <option value="MaximumPayable">Maximum Can Pay</option>
+                <option value="Transactions">Transactions Accepted</option>
+                <option value="TotalSpent">Total Spent</option>
+            </select>
 
-        <table class="table" style="width: 90%; color: white;">
-            <tr style="color:bisque">
-                <th>Position</th>
-                <th>Maximum can Pay</th>
-                <th>Transactions Accepted (%)</th>
-                <th>Total Spent</th>
-            </tr>
-            <tbody id="BuyersTbody"></tbody>
-        </table>
-        <br>
+            <table class="table" style="width: 90%; color: white;">
+                <tr style="color:bisque">
+                    <th>Position</th>
+                    <th>Maximum can Pay</th>
+                    <th>Transactions Accepted (%)</th>
+                    <th>Total Spent</th>
+                </tr>
+                <tbody id="BuyersTbody"></tbody>
+            </table>
+            <br>
 
 
-        <h6>Sellers:</h6>
+            <h6>Sellers:</h6>
 
-        <small style="color: white"><i>Sort By:</i></small>
-        <select name="SellersDisplayFilter" id="SellersDisplayFilter" class="form-control"
-            style="width:20%; background-color:black; color: white">
-            <option value="MinimumAcceptable">Minimum Can Accept</option>
-            <option value="FirstPrice">First Price</option>
-            <option value="Price">Final Price</option>
-            <option value="SummedPrices">Average Price</option>
-            <option value="Transactions">Transactions Accepted</option>
-            <option value="Revenue">Revenue</option>
-        </select>
+            <small style="color: white"><i>Sort By:</i></small>
+            <select name="SellersDisplayFilter" id="SellersDisplayFilter" class="form-control"
+                style="width:20%; background-color:black; color: white">
+                <option value="MinimumAcceptable">Minimum Can Accept</option>
+                <option value="FirstPrice">First Price</option>
+                <option value="Price">Final Price</option>
+                <option value="SummedPrices">Average Price</option>
+                <option value="Transactions">Transactions Accepted</option>
+                <option value="Revenue">Revenue</option>
+            </select>
 
-        <table class="table" style="width: 90%; color: white;">
-            <tr style="color:bisque">
-                <td>Position</td>
-                <th>Minimum can Accept</td>
-                <th>First Price</th>
-                <th>Final Price</th>
-                <th>Average Price</th>
-                <th>Transactions Accepted (%)</th>
-                <th>Revenue</th>
-            </tr>
-            <tbody id="SellersTbody"></tbody>
-        </table>
+            <table class="table" style="width: 90%; color: white;">
+                <tr style="color:bisque">
+                    <td>Position</td>
+                    <th>Minimum can Accept</td>
+                    <th>First Price</th>
+                    <th>Final Price</th>
+                    <th>Average Price</th>
+                    <th>Transactions Accepted (%)</th>
+                    <th>Revenue</th>
+                </tr>
+                <tbody id="SellersTbody"></tbody>
+            </table>
+        </div>
+
     </div>
 
 </body>

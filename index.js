@@ -10,6 +10,8 @@ const BuyersDisplayFilter = document.getElementById("BuyersDisplayFilter");
 const SellersDisplayFilter = document.getElementById("SellersDisplayFilter");
 const HowBuyerChoosesSellerInput = document.getElementById("HowBuyerChoosesSellerInput");
 const StatsTbody = document.getElementById("StatsTbody");
+const OutputDivStatus = document.getElementById("OutputDivStatus");
+const OutputDivData = document.getElementById("OutputDivData");
 
 function GetNumberOfBuyers() {
     let Default = 50;
