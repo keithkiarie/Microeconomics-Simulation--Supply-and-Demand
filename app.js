@@ -132,7 +132,7 @@ function MakeGraph() {
         Category++;
     }
 
-    SellersChartCanvas.width = screen.width * 0.6;
+    SellersChartCanvas.width = screen.width * 0.8;
     SellersChartCanvas.height = screen.height * 0.7;
 
     let ctx = SellersChartCanvas;
