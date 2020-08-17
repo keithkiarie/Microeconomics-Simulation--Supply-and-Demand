@@ -161,6 +161,7 @@ function GetMedianPrice() {
 function StartMarket() {
 
     RunSimulationBtn.innerHTML = "Running...";
+    RunSimulationBtn.removeEventListener("click", StartMarket);
 
     InitializeVariables();
 
@@ -182,5 +183,6 @@ function StartMarket() {
         DisplayOutput();
         OutputDiv.style.visibility = "visible";
         RunSimulationBtn.innerHTML = "Run Simulation";
+        RunSimulationBtn.addEventListener("click", StartMarket);
     }
 }
