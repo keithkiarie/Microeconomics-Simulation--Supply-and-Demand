@@ -21,39 +21,7 @@ function InitializeVariables() {
 
 
 
-function ChooseBuyersToShow() {
-    let BuyersToDisplay = Buyers;
 
-    BuyersToDisplay.sort((a, b) => b[BuyersDisplayFilter.value] - a[BuyersDisplayFilter.value]);
-
-    for (let i = 0; i < BuyersToDisplay.length; i++) BuyersToDisplay[i].Position = i + 1; // give them positions
-
-    if (Buyers.length > 10) {
-        let FirstFive = Buyers.slice(0, 5);
-        BuyersToDisplay = FirstFive;
-        let LastFive = Buyers.slice(Buyers.length - 5);
-        LastFive.forEach(item => BuyersToDisplay.push(item));
-    }
-
-    return BuyersToDisplay;
-}
-
-function ChooseSellersToShow() {
-    let SellersToDisplay = Sellers;
-
-    SellersToDisplay.sort((a, b) => b[SellersDisplayFilter.value] - a[SellersDisplayFilter.value]);
-
-    for (let i = 0; i < SellersToDisplay.length; i++) SellersToDisplay[i].Position = i + 1; // give them positions
-
-    if (Sellers.length > 10) {
-        let FirstFive = Sellers.slice(0, 5);
-        SellersToDisplay = FirstFive;
-        let LastFive = Sellers.slice(Sellers.length - 5);
-        LastFive.forEach(item => SellersToDisplay.push(item));
-    }
-
-    return SellersToDisplay;
-}
 
 
 // Stats
