@@ -1,16 +1,17 @@
 class Seller {
 
-    MinimumAcceptable; // the minimum price a seller can accept for the commodity
-    FirstPrice;
-    Price;
-    SummedPrices = 0;
+    MinimumAcceptable; // the minimum price a seller can accept for the commodity (production cost)
+    FirstPrice; // the price this seller entered the market with
+    Price; // current price the seller is posting
+    SummedPrices = 0; // sum of all prices the seller has posted since opening of market 
 
     Transactions = 0;
-    Revenue = 0;
-    Profit = 0;
+    Revenue = 0; // total amount collected from sales
+    Profit = 0; // revenue - production cost
 
     Visited = false; // whether a customer visited the seller
 
+    // how much the seller will adjust price depending on how the market is
     PriceAdjustmentFactor = {
         Up: (21/20),
         Down: (20/21)

@@ -37,24 +37,13 @@ function DisplayOutput() {
         </tr>
     `;
 
-    // display buyers
-    BuyersTbody.innerHTML = "";
-    let BuyersToDisplay = ChooseBuyersToShow();
-    BuyersToDisplay.forEach(buyer => {
-        BuyersTbody.innerHTML += `
-            <tr>
-                <td>${buyer.Position}</td>
-                <td>${numberWithCommas(buyer.MaximumPayable)}</td>
-                <td>${((buyer.Transactions * 100 / Transactions) || 0).toFixed(2)}</td>
-                <td>${numberWithCommas(Math.round(buyer.TotalSpent))}</td>
-            </tr>
-        `;
-    })
-
 
     // display sellers
     SellersTbody.innerHTML = "";
     let SellersToDisplay = ChooseSellersToShow();
+    MakeGraph();
+
+
     SellersToDisplay.forEach(seller => {
         SellersTbody.innerHTML += `
             <tr>
@@ -71,6 +60,22 @@ function DisplayOutput() {
             </tr>
         `;
     })
+
+
+    // display buyers
+    BuyersTbody.innerHTML = "";
+    let BuyersToDisplay = ChooseBuyersToShow();
+    BuyersToDisplay.forEach(buyer => {
+        BuyersTbody.innerHTML += `
+            <tr>
+                <td>${buyer.Position}</td>
+                <td>${numberWithCommas(buyer.MaximumPayable)}</td>
+                <td>${((buyer.Transactions * 100 / Transactions) || 0).toFixed(2)}</td>
+                <td>${numberWithCommas(Math.round(buyer.TotalSpent))}</td>
+            </tr>
+        `;
+    })
+
 }
 
 function ChooseBuyersToShow() {
@@ -105,4 +110,72 @@ function ChooseSellersToShow() {
     }
 
     return SellersToDisplay;
+}
+
+function MakeGraph() {
+
+    let Highest = Sellers[0][SellersDisplayFilter.value];
+
+    let Width = Math.ceil(Highest / 10);
+    
+    let CategoryNames = [];
+    let CategoriesData = [];
+
+    for (let i = 0; i < 10; i++) CategoriesData.push(0);
+
+    let Category = 0;
+    for (let i = 0; i < Highest; i += Width) {
+        Sellers.forEach(seller => {
+            if (seller[SellersDisplayFilter.value] >= i && seller[SellersDisplayFilter.value] < (i + Width)) CategoriesData[Category]++;
+        });
+        CategoryNames.push(`${i} - ${i + Width}`);
+        Category++;
+    }
+
+    SellersChartCanvas.width = screen.width * 0.6;
+    SellersChartCanvas.height = screen.height * 0.7;
+
+    let ctx = SellersChartCanvas;
+
+    let SellersChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: CategoryNames,
+            datasets: [{
+                label: 'Sellers',
+                data: CategoriesData,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            responsive: false
+        }
+    });
 }

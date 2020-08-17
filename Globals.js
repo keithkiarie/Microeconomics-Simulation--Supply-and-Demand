@@ -12,6 +12,7 @@ const HowBuyerChoosesSellerInput = document.getElementById("HowBuyerChoosesSelle
 const StatsTbody = document.getElementById("StatsTbody");
 const OutputDivStatus = document.getElementById("OutputDivStatus");
 const OutputDivData = document.getElementById("OutputDivData");
+const SellersChartCanvas = document.getElementById("SellersChartCanvas");
 
 function GetNumberOfBuyers() {
     let Default = 50;

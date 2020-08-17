@@ -1,3 +1,5 @@
+// worker thread file
+
 let NumberOfBuyers, NumberOfSellers;
 let Buyers = [];
 let Sellers = [];

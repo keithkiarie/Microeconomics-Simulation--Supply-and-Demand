@@ -10,6 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
     <link rel="stylesheet" href="main.css">
 </head>
@@ -109,6 +110,9 @@
                 <option value="Revenue">Revenue</option>
                 <option value="Profit">Profit</option>
             </select>
+
+            <!-- Canvas for Graph -->
+            <canvas id="SellersChartCanvas" width="auto" height="auto"></canvas>
 
             <div style="overflow-x: auto;">
                 <table class="table" style="width: 90%; color: white;">
